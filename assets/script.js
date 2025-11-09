@@ -1,22 +1,32 @@
-// Gestion améliorée de l'envoi d'email avec EmailJS + fallback mailto
+// Gestion améliorée de l'envoi d'email avec EmailJS (envoi sans quitter l'application)
 // Le formulaire doit inclure les data-attributes : data-service-id, data-template-id, data-user-id
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 
-if (form) {
+function setStatus(message, isError = false) {
+    if (statusEl) {
+        statusEl.textContent = message;
+        statusEl.style.color = isError ? '#d9534f' : '#28a745';
+    } else {
+        alert(message);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!form) return;
+
     const serviceID = form.dataset.serviceId;
     const templateID = form.dataset.templateId;
     const userID = form.dataset.userId;
 
     const isConfigured = serviceID && templateID && userID && !/VOTRE_/i.test(serviceID + templateID + userID);
 
-    function setStatus(message, isError = false) {
-        if (statusEl) {
-            statusEl.textContent = message;
-            statusEl.style.color = isError ? '#d9534f' : '#28a745';
-        } else {
-            // Fallback to alert if no status element
-            alert(message);
+    // Si l'utilisateur a renseigné le userID, on initialise EmailJS dès le chargement pour gagner du temps
+    if (isConfigured) {
+        try {
+            emailjs.init(userID);
+        } catch (e) {
+            console.warn('EmailJS init error:', e);
         }
     }
 
@@ -24,7 +34,11 @@ if (form) {
         event.preventDefault();
 
         const submitButton = form.querySelector('button[type="submit"]');
-        if (submitButton) submitButton.disabled = true;
+        const originalBtnText = submitButton ? submitButton.textContent : null;
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Envoi...';
+        }
 
         // Simple validation
         const name = (form.elements['name'] || {}).value || '';
@@ -33,41 +47,41 @@ if (form) {
 
         if (!name || !email || !message) {
             setStatus('Veuillez remplir tous les champs.', true);
-            if (submitButton) submitButton.disabled = false;
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalBtnText;
+            }
             return;
         }
 
-        if (isConfigured) {
-            // Initialise EmailJS avec le user ID fourni
-            try {
-                emailjs.init(userID);
-            } catch (e) {
-                console.warn('EmailJS init error:', e);
+        if (!isConfigured) {
+            // Ne pas sortir de l'application : informer simplement l'utilisateur
+            setStatus('Envoi non configuré côté serveur/front (EmailJS manquant). Merci de configurer EmailJS dans contact.html.', true);
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalBtnText;
             }
-
-            emailjs.sendForm(serviceID, templateID, this)
-                .then(() => {
-                    setStatus('Votre message a été envoyé avec succès !');
-                    form.reset();
-                    if (submitButton) submitButton.disabled = false;
-                })
-                .catch((error) => {
-                    console.error('Erreur EmailJS:', error);
-                    setStatus('Erreur lors de l\'envoi. Vérifiez la configuration EmailJS dans contact.html.', true);
-                    if (submitButton) submitButton.disabled = false;
-                });
-
-        } else {
-            // Fallback : ouvrir le client mail de l'utilisateur via mailto
-            setStatus("EmailJS non configuré. Ouverture de votre client mail...", false);
-            const subject = encodeURIComponent(`Contact depuis le site - ${name}`);
-            const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\n${message}`);
-            const mailto = `mailto:methagold25@gmail.com?subject=${subject}&body=${body}`;
-            // Petite temporisation pour laisser le message s'afficher
-            setTimeout(() => window.location.href = mailto, 500);
+            return;
         }
+
+        // Envoi via EmailJS (reste dans l'application)
+        emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+                setStatus('Votre message a été envoyé avec succès !');
+                form.reset();
+            })
+            .catch((error) => {
+                console.error('Erreur EmailJS:', error);
+                setStatus('Erreur lors de l\'envoi. Vérifiez la configuration EmailJS dans contact.html.', true);
+            })
+            .finally(() => {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalBtnText;
+                }
+            });
     });
-}
+});
 
 // Animation au scroll (Fade-in)
 // Sélectionne tous les éléments avec la classe 'fade-in'

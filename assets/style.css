@@ -1,0 +1,542 @@
+/* Réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Layout pour footer en bas */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* En-tête avec effet parallaxe */
+.parallax {
+    background: url('assets/hero-bg.webp') no-repeat center/cover fixed;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.parallax::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(34, 34, 34, 0.7);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    z-index: 1;
+}
+
+.logo span {
+    color: #f4b400;
+}
+
+nav {
+    z-index: 1;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: #f4b400;
+}
+
+/* Menu Hamburger */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 120px 20px;
+    background: linear-gradient(135deg, #222, #444);
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #f4b400;
+}
+
+.hero p {
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #f4b400;
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background: #222;
+    color: #fff;
+}
+
+/* Sections communes */
+.services, .projects, .contact, .about, .testimonials, .why-choose {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+h1, h2 {
+    font-family: 'Poppins', sans-serif; /* S'assurer que les titres principaux utilisent Poppins */
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #222;
+    font-weight: 600;
+}
+
+h1 i, h2 i {
+    color: #f4b400;
+    margin-right: 10px;
+}
+
+/* Section Services */
+.service-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Légèrement ajusté */
+    gap: 30px;
+}
+
+.service {
+    background: #fff;
+    padding: 30px; /* Plus de padding */
+    border-radius: 12px; /* Plus arrondi */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.service:hover {
+    transform: translateY(-10px);
+}
+
+.service i { /* Style for service icons */
+    font-size: 3.5em; /* Icônes plus grandes */
+    color: #f4b400;
+    margin-bottom: 20px; /* Plus d'espace sous les icônes */
+}
+
+.service h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em; /* Taille du titre de service */
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.service p {
+    font-family: 'Open Sans', sans-serif; /* Police Open Sans pour le texte des services */
+    font-size: 1em;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Section Projets */
+.projects h2 {
+    font-size: 2.8em; /* Plus grand pour le titre de section */
+    margin-bottom: 40px;
+    color: #222;
+    font-weight: 700; /* Plus gras pour l'impact */
+}
+
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project {
+    background: #fff;
+    padding: 30px; /* Augmenter le padding pour plus d'espace */
+    border-radius: 12px; /* Coins plus arrondis */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    display: flex; /* Utiliser flexbox pour le contenu */
+    flex-direction: column;
+    justify-content: space-between; /* Assurer que le bouton est en bas */
+}
+
+.project:hover {
+    transform: translateY(-12px); /* Effet de survol plus prononcé */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Ombre plus intense au survol */
+}
+
+.project img {
+    width: 100%;
+    height: 220px; /* Hauteur des images un peu plus grande */
+    object-fit: cover;
+    border-radius: 10px; /* Arrondir les coins des images */
+    margin-bottom: 20px; /* Plus d'espace sous l'image */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Légère ombre sur les images */
+}
+
+.project h2 {
+    font-family: 'Poppins', sans-serif; /* Assurer une police cohérente */
+    font-size: 1.8em; /* Taille du titre du projet */
+    color: #333; /* Couleur légèrement plus douce pour le titre du projet */
+    margin-bottom: 15px; /* Espacement sous le titre du projet */
+    line-height: 1.3;
+    font-weight: 600; /* Gras moyen */
+}
+
+.project p {
+    font-family: 'Open Sans', sans-serif; /* Utiliser Open Sans pour le corps de texte */
+    font-size: 1em; /* Taille du texte descriptif */
+    color: #555; /* Couleur du texte plus douce */
+    margin-bottom: 15px; /* Espacement entre les paragraphes */
+    line-height: 1.7; /* Espacement des lignes pour une meilleure lisibilité */
+}
+
+.project p strong {
+    color: #333; /* Rendre les technologies bien visibles */
+    font-weight: 600;
+}
+
+.project-link {
+    display: inline-block; /* Pour que le padding et les marges fonctionnent bien */
+    margin-top: auto; /* Pousser le bouton vers le bas si le contenu varie en hauteur */
+    padding: 12px 25px; /* Padding ajusté */
+    background: #f4b400;
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 25px; /* Bouton plus arrondi */
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    align-self: center; /* Centrer le bouton */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Légère ombre sur le bouton */
+}
+
+.project-link:hover {
+    background: #222;
+    color: #fff;
+    transform: translateY(-2px); /* Petit effet de survol sur le bouton */
+}
+
+/* Section Témoignages */
+.testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajusté */
+    gap: 20px;
+}
+
+.testimonial {
+    background: #fff;
+    padding: 25px; /* Plus de padding */
+    border-radius: 12px; /* Plus arrondi */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.testimonial p {
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 1.05em;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.testimonial cite {
+    display: block;
+    margin-top: 10px;
+    font-weight: 700; /* Plus gras */
+    color: #f4b400;
+    font-size: 0.95em;
+}
+
+/* Section Contact */
+.contact p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    color: #444;
+}
+
+/* Formulaire (si présent sur une page contact.html) */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+input, textarea {
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+button[type="submit"] { /* Spécifier le type pour les boutons */
+    padding: 12px;
+    background: #f4b400;
+    color: #222;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+button[type="submit"]:hover {
+    background: #222;
+    color: #fff;
+}
+
+/* Bouton Retour en haut */
+.scroll-top {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background: #f4b400;
+    color: #222;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: none; /* Managed by JS */
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    transition: transform 0.3s, opacity 0.3s;
+    z-index: 1000;
+}
+
+.scroll-top:hover {
+    transform: translateY(-5px);
+    opacity: 0.9;
+}
+
+/* Footer */
+footer {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 30px 20px;
+    background: #222;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif; /* Utiliser Open Sans pour le texte du footer */
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.footer-logo span {
+    color: #f4b400;
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 0.95em;
+}
+
+footer a {
+    color: #f4b400;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+footer a i {
+    margin-right: 5px;
+    transition: transform 0.3s;
+}
+
+footer a:hover i {
+    transform: scale(1.2);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .parallax {
+        flex-direction: column;
+        padding: 15px; /* Ajuster le padding */
+    }
+
+    .logo {
+        margin-bottom: 15px; /* Espace sous le logo en mode mobile */
+    }
+
+    .hamburger {
+        display: block;
+        position: absolute; /* Positionner le hamburger */
+        right: 20px;
+        top: 25px;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #222;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 10px 0; /* Padding pour la navigation mobile */
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .hero {
+        padding: 80px 20px; /* Réduire le padding hero */
+    }
+
+    .hero h1 {
+        font-size: 2.2em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    /* Sections */
+    .services, .projects, .contact, .about, .testimonials, .why-choose {
+        padding: 60px 15px; /* Réduire le padding des sections */
+    }
+
+    h1, h2 {
+        font-size: 2em; /* Réduire la taille des titres de section */
+        margin-bottom: 25px;
+    }
+
+    .service-container, .project-container, .testimonial-container {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    }
+
+    .service {
+        padding: 25px;
+    }
+
+    .service i {
+        font-size: 3em;
+    }
+
+    .service h3 {
+        font-size: 1.3em;
+    }
+
+    .project {
+        padding: 25px;
+    }
+
+    .project img {
+        height: 180px; /* Réduire la hauteur des images de projet */
+    }
+
+    .project h2 {
+        font-size: 1.5em;
+    }
+
+    .project p {
+        font-size: 0.9em;
+    }
+
+    .btn {
+        padding: 10px 25px; /* Ajuster le padding du bouton */
+    }
+
+    footer a {
+        font-size: 13px;
+        margin: 0 5px;
+    }
+
+    .scroll-top {
+        bottom: 90px; /* Ajuster la position du bouton scroll-top */
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projets de Methagold en informatique de gestion : applications web, automatisation et systèmes d’entreprise.">
+    <meta name="keywords" content="informatique de gestion, projets, développeur, Sénégal, PHP, Python, C++, C#, Java">
+    <meta name="author" content="Methagold">
+    <title>Mes Projets - Methagold.sn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #222;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .logo span {
+            color: #f4b400;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #f4b400;
+        }
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            color: #222;
+            margin-bottom: 20px;
+        }
+        h1 i {
+            color: #f4b400;
+            margin-right: 10px;
+        }
+        .project-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .project {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .project img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .project p {
+            margin-bottom: 10px;
+        }
+        .project-link {
+            color: #f4b400;
+            text-decoration: none;
+        }
+        .project-link:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        footer a {
+            color: #f4b400;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        footer a i {
+            margin-right: 5px;
+        }
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #f4b400;
+            color: #222;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+            }
+            .hamburger {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #222;
+                position: absolute;
+                top: 70px;
+                left: 0;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+    <header>
+        <div class="logo">Methagold<span>.sn</span></div>
+        <nav>
+            <div class="hamburger" aria-label="Toggle menu"><i class="fas fa-bars"></i></div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="about.html">À Propos</a></li>
+                <li><a href="projects.html" class="active">Projets</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1><i class="fas fa-project-diagram"></i> Mes Projets</h1>
+            <div class="project-container">
+                <div class="project">
+                    <img src="assets/project1.webp" alt="Système ERP pour PME" loading="lazy" onerror="this.style.display='none';">
+                    <h2>Système ERP pour PME</h2>
+                    <p>Un système de gestion intégré pour la comptabilité, l’inventaire et les RH.</p>
+                    <p><strong>Technologies :</strong> PHP, MySQL, Bootstrap</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/project2.webp" alt="Tableau de Bord Financier" loading="lazy" onerror="this.style.display='none';">
+                    <h2>Tableau de Bord Financier</h2>
+                    <p>Un outil d’analyse des données financières avec graphiques interactifs.</p>
+                    <p><strong>Technologies :</strong> Python, Django, Chart.js</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/project3.webp" alt="Gestion de Tontine" loading="lazy" onerror="this.style.display='none';">
+                    <h2>Gestion de Tontine</h2>
+                    <p>Une application web pour automatiser la gestion des tontines.</p>
+                    <p><strong>Technologies :</strong> Java, MySQL</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/project4.webp" alt="Système de Réservation" loading="lazy" onerror="this.style.display='none';">
+                    <h2>Système de Réservation</h2>
+                    <p>Une application pour gérer les réservations dans les hôtels.</p>
+                    <p><strong>Technologies :</strong> C#, ASP.NET</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/project5.webp" alt="Automatisation de Processus" loading="lazy" onerror="this.style.display='none';">
+                    <h2>Automatisation de Processus</h2>
+                    <p>Un outil pour automatiser les tâches répétitives en entreprise.</p>
+                    <p><strong>Technologies :</strong> C++, Python</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <a href="#top" class="scroll-top" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i></a>
+
+    <footer>
+        <p>Retrouvez-moi sur :
+            <a href="https://linkedin.com/in/ton-profil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+            <a href="https://github.com/ton-profil" target="_blank"><i class="fab fa-github"></i> GitHub</a> |
+            <a href="https://wa.me/+221781214810" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a> |
+            <a href="mailto:contact@methagold.sn"><i class="fas fa-envelope"></i> Email</a>
+        </p>
+        <p>© 2025 Methagold.sn - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        // Simple hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navUl = document.querySelector('nav ul');
+        if (hamburger && navUl) {
+            hamburger.addEventListener('click', () => {
+                navUl.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Methagold.sn, développeur full-stack au Sénégal, crée des applications web, mobiles et bots automatisés.">
+    <meta name="keywords" content="développeur web, full-stack, Sénégal, Laravel, Flutter, bots trading">
+    <meta name="author" content="Methagold">
+    <title>Accueil - Methagold.sn</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Effet glow pour la signature */
+        footer .signature {
+            margin-top: 15px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffd700; /* doré */
+            text-shadow: 
+                0 0 5px #ffd700,
+                0 0 10px #ffd700,
+                0 0 20px #ff8c00,
+                0 0 30px #ff8c00,
+                0 0 40px #ff4500,
+                0 0 50px #ff4500;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 
+                    0 0 5px #ffd700,
+                    0 0 10px #ffd700,
+                    0 0 20px #ff8c00,
+                    0 0 30px #ff8c00,
+                    0 0 40px #ff4500,
+                    0 0 50px #ff4500;
+                color: #ffd700;
+            }
+            to {
+                text-shadow: 
+                    0 0 10px #ffff33,
+                    0 0 20px #ffff33,
+                    0 0 30px #ffcc00,
+                    0 0 40px #ffcc00,
+                    0 0 50px #ff9900,
+                    0 0 60px #ff9900;
+                color: #ffff33;
+            }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- HEADER -->
+    <header class="parallax">
+        <div class="logo">Methagold<span>.sn</span></div>
+        <nav>
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
+            <ul>
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="about.html">À Propos</a></li>
+                <li><a href="projects.html">Projets</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- HERO -->
+        <section class="hero fade-in">
+            <h1>Bienvenue sur <span>Methagold.sn</span></h1>
+            <p>Développeur polyvalent créant des solutions innovantes pour le web, le mobile et l’automatisation.</p>
+            <a href="projects.html" class="btn">Découvrir mes projets</a>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="services fade-in">
+            <h2><i class="fas fa-tools"></i> Mes Services</h2>
+            <div class="service-container">
+                <div class="service">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Développement Web</h3>
+                    <p>Création de sites et applications modernes avec <strong>Laravel</strong>, <strong>PHP</strong> et <strong>React</strong>.</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Développement Mobile</h3>
+                    <p>Applications performantes avec <strong>Flutter</strong> et <strong>React Native</strong>.</p>
+                </div>
+                <div class="service">
+                    <i class="fas fa-robot"></i>
+                    <h3>Automatisation & Bots</h3>
+                    <p>Bots <strong>Telegram</strong> et trading automatisé en <strong>C++</strong> et <strong>Python</strong>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJETS -->
+        <section class="projects fade-in">
+            <h2><i class="fas fa-project-diagram"></i> Projets Récents</h2>
+            <div class="project-container">
+                <div class="project">
+                    <img src="assets/e-commerce.webp" alt="Plateforme E-commerce" loading="lazy" onerror="this.style.display='none';">
+                    <h3>Plateforme E-commerce B2C</h3>
+                    <p>Développement d'une boutique en ligne complète avec gestion des stocks et paiements sécurisés.</p>
+                    <p><strong>Technologies :</strong> PHP, Laravel, Vue.js, MySQL, Stripe</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/dashboard.webp" alt="Application de Gestion de Projet" loading="lazy" onerror="this.style.display='none';">
+                    <h3>Application de Gestion de Projet</h3>
+                    <p>Une solution intuitive pour le suivi des tâches, la collaboration d'équipe et la planification.</p>
+                    <p><strong>Technologies :</strong> JavaScript, React, Node.js, MongoDB, WebSockets</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/chatbot.webp" alt="Chatbot IA pour Service Client" loading="lazy" onerror="this.style.display='none';">
+                    <h3>Chatbot IA pour Service Client</h3>
+                    <p>Un chatbot intelligent intégré à Telegram pour des réponses instantanées et l'automatisation des requêtes.</p>
+                    <p><strong>Technologies :</strong> Python, TensorFlow, Telegram API</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/mobile-app.webp" alt="Application Mobile de Fitness" loading="lazy" onerror="this.style.display='none';">
+                    <h3>Application Mobile de Fitness</h3>
+                    <p>Suivi d'activités, plans d'entraînement personnalisés et intégration de capteurs de santé.</p>
+                    <p><strong>Technologies :</strong> Dart, Flutter, Firebase</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+                <div class="project">
+                    <img src="assets/data-analysis.webp" alt="Système d'Analyse de Données en Temps Réel" loading="lazy" onerror="this.style.display='none';">
+                    <h3>Système d'Analyse de Données en Temps Réel</h3>
+                    <p>Collecte, traitement et visualisation de données pour la prise de décision stratégique.</p>
+                    <p><strong>Technologies :</strong> Scala, Kafka, Spark, Tableau</p>
+                    <a href="#" class="project-link">Voir le projet</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials fade-in">
+            <h2><i class="fas fa-quote-left"></i> Ce qu'ils disent</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p>"La qualité du développement mobile de Methagold est impressionnante. Notre application de livraison fonctionne parfaitement et nos clients l'adorent !"</p>
+                    <cite>- Sarah D., Startup E-commerce Dakar</cite>
+                </div>
+                <div class="testimonial">
+                    <p>"Le système de gestion d'inventaire qu'il a développé pour notre entreprise a révolutionné notre façon de travailler. Un vrai professionnel qui comprend les besoins des entreprises."</p>
+                    <cite>- Amadou N., Directeur Commercial</cite>
+                </div>
+                <div class="testimonial">
+                    <p>"Notre site web éducatif n'a jamais été aussi performant ! La refonte complète a augmenté notre taux d'inscription de 150%. Une expertise technique remarquable."</p>
+                    <cite>- Dr. Fatou S., Directrice d'École en Ligne</cite>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact fade-in">
+            <h2><i class="fas fa-envelope"></i> Travaillons ensemble</h2>
+            <p>Besoin d’un site web, d’une application ou d’un bot ? Contactez-moi dès maintenant !</p>
+            <a href="contact.html" class="btn">Me Contacter</a>
+        </section>
+    </main>
+
+    <!-- SCROLL TOP -->
+    <a href="#top" class="scroll-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- FOOTER -->
+    <footer class="fade-in">
+        <p>Retrouvez-moi sur :
+            <a href="" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+            <a href="" target="_blank"><i class="fab fa-github"></i> GitHub</a> |
+            <a href="" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a> |
+            <a href="mailto:contact@methagold.sn"><i class="fas fa-envelope"></i> Email</a>
+        </p>
+        <p>© 2025 Methagold.sn - Tous droits réservés</p>
+        <p class="signature">✨ Better Call Methagold ✨</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="assets/script.js"></script>
+
+</body>
+</html>

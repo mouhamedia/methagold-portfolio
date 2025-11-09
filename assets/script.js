@@ -1,31 +1,73 @@
-//Initialisation EmailJS
-// Remplacez "VOTRE_CLÉ_PUBLIQUE" par votre Public Key (aussi appelée User ID) trouvée sur votre compte EmailJS.
-// Exemple : emailjs.init("user_xxxxxxxxxxxxxxx");
-(function() {
-    emailjs.init("VOTRE_CLÉ_PUBLIQUE");
-})();
+// Gestion améliorée de l'envoi d'email avec EmailJS + fallback mailto
+// Le formulaire doit inclure les data-attributes : data-service-id, data-template-id, data-user-id
+const form = document.getElementById('contact-form');
+const statusEl = document.getElementById('form-status');
 
-// Gestion du formulaire de contact
-// Cette partie s'active quand le formulaire avec l'ID 'contact-form' est soumis.
-document.getElementById('contact-form')?.addEventListener('submit', function(event) {
-    event.preventDefault(); // Empêche le rechargement de la page par défaut
+if (form) {
+    const serviceID = form.dataset.serviceId;
+    const templateID = form.dataset.templateId;
+    const userID = form.dataset.userId;
 
-    // Utilisez emailjs.sendForm pour envoyer toutes les données du formulaire en une seule fois.
-    // Assurez-vous que les 'name' de vos champs HTML (ex: name="name", name="email", name="message")
-    // correspondent aux placeholders dans votre modèle d'email EmailJS (ex: {{name}}, {{email}}, {{message}}).
-    // Remplacez "VOTRE_SERVICE_ID" et "VOTRE_TEMPLATE_ID" par vos IDs réels d'EmailJS.
-    emailjs.sendForm('VOTRE_SERVICE_ID', 'VOTRE_TEMPLATE_ID', this)
-        .then(() => {
-            // Message de succès affiché à l'utilisateur
-            alert('Votre message a été envoyé avec succès !');
-            // Réinitialise tous les champs du formulaire après un envoi réussi
-            this.reset();
-        }, (error) => {
-            // Message d'erreur si l'envoi échoue
-            console.error('Erreur lors de l\'envoi du message :', error); // Log l'erreur complète dans la console
-            alert('Désolé, une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.');
-        });
-});
+    const isConfigured = serviceID && templateID && userID && !/VOTRE_/i.test(serviceID + templateID + userID);
+
+    function setStatus(message, isError = false) {
+        if (statusEl) {
+            statusEl.textContent = message;
+            statusEl.style.color = isError ? '#d9534f' : '#28a745';
+        } else {
+            // Fallback to alert if no status element
+            alert(message);
+        }
+    }
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) submitButton.disabled = true;
+
+        // Simple validation
+        const name = (form.elements['name'] || {}).value || '';
+        const email = (form.elements['email'] || {}).value || '';
+        const message = (form.elements['message'] || {}).value || '';
+
+        if (!name || !email || !message) {
+            setStatus('Veuillez remplir tous les champs.', true);
+            if (submitButton) submitButton.disabled = false;
+            return;
+        }
+
+        if (isConfigured) {
+            // Initialise EmailJS avec le user ID fourni
+            try {
+                emailjs.init(userID);
+            } catch (e) {
+                console.warn('EmailJS init error:', e);
+            }
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    setStatus('Votre message a été envoyé avec succès !');
+                    form.reset();
+                    if (submitButton) submitButton.disabled = false;
+                })
+                .catch((error) => {
+                    console.error('Erreur EmailJS:', error);
+                    setStatus('Erreur lors de l\'envoi. Vérifiez la configuration EmailJS dans contact.html.', true);
+                    if (submitButton) submitButton.disabled = false;
+                });
+
+        } else {
+            // Fallback : ouvrir le client mail de l'utilisateur via mailto
+            setStatus("EmailJS non configuré. Ouverture de votre client mail...", false);
+            const subject = encodeURIComponent(`Contact depuis le site - ${name}`);
+            const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\n${message}`);
+            const mailto = `mailto:methagold25@gmail.com?subject=${subject}&body=${body}`;
+            // Petite temporisation pour laisser le message s'afficher
+            setTimeout(() => window.location.href = mailto, 500);
+        }
+    });
+}
 
 // Animation au scroll (Fade-in)
 // Sélectionne tous les éléments avec la classe 'fade-in'

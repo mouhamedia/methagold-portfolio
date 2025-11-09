@@ -29,12 +29,15 @@
         <section class="contact fade-in">
             <h1><i class="fas fa-envelope"></i> Contactez-moi</h1>
             <p>Envoyez-moi un message pour discuter de votre projet !</p>
-            <form id="contact-form">
+            <!-- Remplissez les data-attributes ci-dessous avec vos identifiants EmailJS (Service ID, Template ID, User ID) -->
+            <form id="contact-form" data-service-id="VOTRE_SERVICE_ID" data-template-id="VOTRE_TEMPLATE_ID" data-user-id="VOTRE_USER_ID">
                 <input type="text" name="name" placeholder="Votre Nom" required>
                 <input type="email" name="email" placeholder="Votre Email" required>
                 <textarea name="message" placeholder="Votre Message" required></textarea>
                 <button type="submit">Envoyer</button>
             </form>
+            <!-- Zone d'information pour les messages de succès / erreur -->
+            <div id="form-status" aria-live="polite" style="margin-top:15px; color: #222;"></div>
             <p><i class="fas fa-envelope"></i> Email : <a href="mailto:methagold25@gmail.com">methagold25@gmail.com</a></p>
             <p><i class="fas fa-phone"></i> Téléphone : <a href="https://wa.me/+221781214810">+221 78 121 48 10</a></p>
         </section>

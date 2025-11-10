@@ -1,87 +1,87 @@
-// Gestion améliorée de l'envoi d'email avec EmailJS (envoi sans quitter l'application)
-// Le formulaire doit inclure les data-attributes : data-service-id, data-template-id, data-user-id
+// ========================================
+// GESTION DU FORMULAIRE DE CONTACT - EmailJS
+// ========================================
+// Configuration : Remplissez les 3 valeurs dans contact.html (data-service-id, data-template-id, data-user-id)
+
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
 
-function setStatus(message, isError = false) {
-    if (statusEl) {
-        statusEl.textContent = message;
-        statusEl.style.color = isError ? '#d9534f' : '#28a745';
-    } else {
-        alert(message);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (!form) return;
-
+if (form) {
+    // Récupérer les identifiants depuis les attributs du formulaire
     const serviceID = form.dataset.serviceId;
     const templateID = form.dataset.templateId;
     const userID = form.dataset.userId;
 
-    const isConfigured = serviceID && templateID && userID && !/VOTRE_/i.test(serviceID + templateID + userID);
+    // Vérifier si la configuration est complète
+    const isConfigured = serviceID && templateID && userID && 
+                         !/VOTRE_/i.test(serviceID + templateID + userID);
 
-    // Si l'utilisateur a renseigné le userID, on initialise EmailJS dès le chargement pour gagner du temps
-    if (isConfigured) {
-        try {
-            emailjs.init(userID);
-        } catch (e) {
-            console.warn('EmailJS init error:', e);
-        }
+    // Initialiser EmailJS dès le chargement si configuré
+    if (isConfigured && typeof emailjs !== 'undefined') {
+        emailjs.init(userID);
+        console.log('✓ EmailJS initialisé avec succès');
+    } else {
+        console.warn('⚠ EmailJS non configuré. Veuillez ajouter Service ID, Template ID et User ID dans contact.html');
     }
 
+    // Gestion de la soumission du formulaire
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalBtnText = submitButton ? submitButton.textContent : null;
-        if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.textContent = 'Envoi...';
-        }
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn?.textContent || 'Envoyer';
 
-        // Simple validation
-        const name = (form.elements['name'] || {}).value || '';
-        const email = (form.elements['email'] || {}).value || '';
-        const message = (form.elements['message'] || {}).value || '';
+        // Validation simple
+        const name = form.elements['name']?.value?.trim() || '';
+        const email = form.elements['email']?.value?.trim() || '';
+        const message = form.elements['message']?.value?.trim() || '';
 
         if (!name || !email || !message) {
-            setStatus('Veuillez remplir tous les champs.', true);
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = originalBtnText;
-            }
+            showStatus('❌ Veuillez remplir tous les champs.', true);
             return;
         }
 
         if (!isConfigured) {
-            // Ne pas sortir de l'application : informer simplement l'utilisateur
-            setStatus('Envoi non configuré côté serveur/front (EmailJS manquant). Merci de configurer EmailJS dans contact.html.', true);
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = originalBtnText;
-            }
+            showStatus('❌ EmailJS non configuré. Ajoutez vos identifiants dans contact.html.', true);
             return;
         }
 
-        // Envoi via EmailJS (reste dans l'application)
+        // Feedback visuel pendant l'envoi
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Envoi...';
+        }
+
+        // Envoyer le formulaire via EmailJS
         emailjs.sendForm(serviceID, templateID, this)
             .then(() => {
-                setStatus('Votre message a été envoyé avec succès !');
+                showStatus('✅ Votre message a été envoyé avec succès !', false);
                 form.reset();
+                console.log('Message envoyé avec succès');
             })
             .catch((error) => {
-                console.error('Erreur EmailJS:', error);
-                setStatus('Erreur lors de l\'envoi. Vérifiez la configuration EmailJS dans contact.html.', true);
+                console.error('Erreur lors de l\'envoi:', error);
+                showStatus('❌ Erreur lors de l\'envoi. Vérifiez votre configuration.', true);
             })
             .finally(() => {
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalBtnText;
+                // Restaurer le bouton
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
                 }
             });
     });
-});
+
+    // Fonction pour afficher les messages de statut
+    function showStatus(message, isError) {
+        if (statusEl) {
+            statusEl.textContent = message;
+            statusEl.style.color = isError ? '#d9534f' : '#28a745';
+            statusEl.style.marginTop = '15px';
+            statusEl.style.fontWeight = '600';
+        }
+    }
+}
 
 // Animation au scroll (Fade-in)
 // Sélectionne tous les éléments avec la classe 'fade-in'
